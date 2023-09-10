@@ -388,7 +388,7 @@ static NSUInteger gcd(NSUInteger a, NSUInteger b)
     if (delayTimeNumber != nil) {
         const NSTimeInterval delayTime = [delayTimeNumber floatValue];
         // If we have a nil image (e.g. waiting for frame), don't update the view nor playhead.
-        UIImage *_Nullable const image = [self.animatedImage imageLazilyCachedAtIndex:self.currentFrameIndex];
+        UIImage *_Nullable const image = [self.animatedImage imageLazilyCachedAtIndex:self.currentFrameIndex loadFallbackIfNeeded:NO];
         if (image) {
             FLLog(FLLogLevelVerbose, @"Showing frame %lu for animated image: %@", (unsigned long)self.currentFrameIndex, self.animatedImage);
             self.currentFrame = image;
