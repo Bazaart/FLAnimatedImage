@@ -43,7 +43,8 @@ extern const NSTimeInterval kFLAnimatedImageDelayTimeIntervalMinimum;
 // Intended to be called from main thread synchronously; will return immediately.
 // If the result isn't cached, will return `nil`; the caller should then pause playback, not increment frame counter and keep polling.
 // After an initial loading time, depending on `frameCacheSize`, frames should be available immediately from the cache.
-- (UIImage *)imageLazilyCachedAtIndex:(NSUInteger)index;
+// if loadFallbackIfNeeded is YES and result isn't cached, the imageAtIndex will be returned 
+- (UIImage *)imageLazilyCachedAtIndex:(NSUInteger)index loadFallbackIfNeeded:(BOOL)loadFallback;
 
 // Pass either a `UIImage` or an `FLAnimatedImage` and get back its size
 + (CGSize)sizeForImage:(id)image;

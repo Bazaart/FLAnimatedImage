@@ -380,7 +380,7 @@ static NSHashTable *allAnimatedImagesWeak;
 
 // See header for more details.
 // Note: both consumer and producer are throttled: consumer by frame timings and producer by the available memory (max buffer window size).
-- (UIImage *)imageLazilyCachedAtIndex:(NSUInteger)index
+- (UIImage *)imageLazilyCachedAtIndex:(NSUInteger)index loadFallbackIfNeeded:(BOOL)loadFallback
 {
     // Early return if the requested index is beyond bounds.
     // Note: We're comparing an index with a count and need to bail on greater than or equal to.
@@ -419,6 +419,9 @@ static NSHashTable *allAnimatedImagesWeak;
     // Purge if needed based on the current playhead position.
     [self purgeFrameCacheIfNeeded];
     
+    if (!image && loadFallback) {
+        return [self imageAtIndex:index];
+    }
     return image;
 }
 
